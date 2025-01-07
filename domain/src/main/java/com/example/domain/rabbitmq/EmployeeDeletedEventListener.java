@@ -14,7 +14,8 @@ public class EmployeeDeletedEventListener {
 
     @RabbitListener(queues = "employeeDeleted")
     public void listen(String message) {
-        System.out.println(message);
-        employeeRepository.deleteById(Long.getLong(message));
+        var id = Long.valueOf(message);
+        System.out.println(id);
+        employeeRepository.deleteById(id);
     }
 }

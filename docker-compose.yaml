@@ -84,37 +84,37 @@ services:
     depends_on:
       - domain
 
-  # prometheus:
-  #   image: prom/prometheus:latest
-  #   container_name: Prometheus
-  #   volumes:
-  #     - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-  #   ports:
-  #     - "9090:9090"
-  #   depends_on:
-  #     - gateway
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: Prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - gateway
 
-  # grafana:
-  #   image: grafana/grafana:latest
-  #   container_name: Grafana
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./grafana/provisioning:/etc/grafana/provisioning
-  #   environment:
-  #     - GF_SECURITY_ADMIN_USER=admin
-  #     - GF_SECURITY_ADMIN_PASSWORD=admin
-  #   depends_on:
-  #     - prometheus
+  grafana:
+    image: grafana/grafana:latest
+    container_name: Grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
 
-  # elasticsearch:
-  #   image: elasticsearch:7.9.3
-  #   container_name: ElasticSearch
-  #   environment:
-  #     - discovery.type=single-node
-  #     - xpack.security.enabled=false
-  #   ports:
-  #     - "9200:9200"
+  elasticsearch:
+    image: elasticsearch:7.9.3
+    container_name: ElasticSearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
 
   logstash:
     image: logstash:7.9.3
@@ -122,19 +122,19 @@ services:
     volumes:
       - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       - ./logstash/logs/application.log:/app/logs/application.log
-    # depends_on:
-      # - elasticsearch
+    depends_on:
+      - elasticsearch
     ports:
       - "5044:5044"
       - "5000:5000"
       - "9600:9600"
 
-  # kibana:
-  #   image: kibana:7.9.3
-  #   container_name: Kibana
-  #   environment:
-  #     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-  #   ports:
-  #     - "5601:5601"
-  #   depends_on:
-  #     - elasticsearch
+  kibana:
+    image: kibana:7.9.3
+    container_name: Kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
