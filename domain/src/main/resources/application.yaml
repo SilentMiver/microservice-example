@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/employee_db
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+#    url: jdbc:postgresql://localhost:5432/employee_db
+#    username: admin
+#    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+rabbitmq:
+  host: ${RABBITMQ_HOST}
+  port: ${RABBITMQ_PORT}
+#  host: rabbitmq
+#  port: 5672
+  username: guest
+  password: guest
+  queues:
+    employee-created: employeeCreated
+    employee-updated: employeeUpdated
+    employee-deleted: employeeDeleted
+
+grpc:
+  server:
+    port: ${GRPC_SERVER_PORT}
+
+server:
+  port: 8082

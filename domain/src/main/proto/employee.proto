@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package employee;
+
+service EmployeeService {
+  rpc GetAllEmployees (Empty) returns (EmployeeList);
+  rpc GetEmployeeById (EmployeeRequest) returns (Employee);
+}
+
+message EmployeeRequest {
+  int64 id = 1;
+}
+
+message EmployeeList {
+  repeated Employee employees = 1;
+}
+
+message Employee {
+  int64 id = 1;
+  string name = 2;
+  string position = 3;
+  int32 salary = 4;
+  string hireDate = 5;
+}
+
+message Empty {}
