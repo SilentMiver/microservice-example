@@ -13,7 +13,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: PgAdmin
+    container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
@@ -24,14 +24,14 @@ services:
 
   redis:
     image: redis/redis-stack:latest
-    container_name: RedisStack
+    container_name: redis
     ports:
       - "6379:6379"
       - "8001:8001"
 
   rabbitmq:
     image: rabbitmq:management
-    container_name: RabbitMQ
+    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -43,7 +43,7 @@ services:
       dockerfile: Dockerfile
     #image: kottzi/domain:latest
     pull_policy: always
-    container_name: DomainService
+    container_name: domain
     ports:
       - "8082:8082"
       - "50051:50051"
@@ -69,7 +69,7 @@ services:
       dockerfile: Dockerfile
     # image: kottzi/gateway:latest
     pull_policy: always
-    container_name: GatewayService
+    container_name: gateway
     ports:
       - "8080:8080"
     volumes:

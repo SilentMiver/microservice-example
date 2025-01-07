@@ -1,4 +1,9 @@
 spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    password: guest
+    username: guest
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/employee_db
     username: ${POSTGRES_USER}

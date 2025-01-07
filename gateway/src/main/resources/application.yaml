@@ -7,10 +7,6 @@ spring:
     password: guest
     username: guest
     virtual-host: /
-    queues:
-      employee-created: employeeCreated
-      employee-updated: employeeUpdated
-      employee-deleted: employeeDeleted
   jackson:
     serialization:
       fail-on-empty-beans: false
@@ -24,8 +20,11 @@ grpc:
     host: ${GRPC_SERVER_HOST}
     port: ${GRPC_SERVER_PORT}
 
-
-
+rabbitmq:
+  queues:
+    employee-created: employeeCreated
+    employee-updated: employeeUpdated
+    employee-deleted: employeeDeleted
 server:
   port: 8080
 
