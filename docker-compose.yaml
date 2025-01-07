@@ -63,26 +63,26 @@ services:
       - rabbitmq
       - redis
 
-  # gateway:
-  #   build:
-  #     context: ./gateway
-  #     dockerfile: Dockerfile
-  #   image: kottzi/gateway:latest
-  #   pull_policy: always
-  #   container_name: GatewayService
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./logstash/logs/application.log:/app/logs/application.log
-  #   environment:
-  #     - RABBITMQ_HOST=rabbitmq
-  #     - RABBITMQ_PORT=5672
-  #     - REDIS_HOST=redis
-  #     - REDIS_PORT=6379
-  #     - GRPC_SERVER_HOST=domain
-  #     - GRPC_SERVER_PORT=50051
-  #   depends_on:
-  #     - domain
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    # image: kottzi/gateway:latest
+    pull_policy: always
+    container_name: GatewayService
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logstash/logs/application.log:/app/logs/application.log
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - GRPC_SERVER_HOST=domain
+      - GRPC_SERVER_PORT=50051
+    depends_on:
+      - domain
 
   # prometheus:
   #   image: prom/prometheus:latest
@@ -116,18 +116,18 @@ services:
   #   ports:
   #     - "9200:9200"
 
-  # logstash:
-  #   image: logstash:7.9.3
-  #   container_name: Logstash
-  #   volumes:
-  #     - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-  #     - ./logstash/logs/application.log:/app/logs/application.log
-  #   depends_on:
-  #     - elasticsearch
-  #   ports:
-  #     - "5044:5044"
-  #     - "5000:5000"
-  #     - "9600:9600"
+  logstash:
+    image: logstash:7.9.3
+    container_name: Logstash
+    volumes:
+      - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./logstash/logs/application.log:/app/logs/application.log
+    # depends_on:
+      # - elasticsearch
+    ports:
+      - "5044:5044"
+      - "5000:5000"
+      - "9600:9600"
 
   # kibana:
   #   image: kibana:7.9.3
