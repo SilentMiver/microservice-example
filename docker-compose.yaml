@@ -38,10 +38,10 @@ services:
     restart: always
 
   domain:
-    build:
-      context: ./domain
-      dockerfile: Dockerfile
-    #image: kottzi/domain:latest
+    # build:
+    #   context: ./domain
+    #   dockerfile: Dockerfile
+    image: silentmiver4/domain:1.0.0
     pull_policy: always
     container_name: domain
     ports:
@@ -64,10 +64,10 @@ services:
       - redis
 
   gateway:
-    build:
-      context: ./gateway
-      dockerfile: Dockerfile
-    # image: kottzi/gateway:latest
+    # build:
+    #   context: ./gateway
+    #   dockerfile: Dockerfile
+    image: silentmiver4/gateway:1.0.0
     pull_policy: always
     container_name: gateway
     ports:
